@@ -14,7 +14,7 @@ struct node
 
 
 int ABC(struct node* term){
-    return (term->A + term->B + term->C);
+    return (term->A + term->B + term->C); 
 }
 
 int ABCcompare(struct node* termP, struct node* termQ){
@@ -91,7 +91,7 @@ struct node* insertInOrder(struct node* first,int coeff, int A, int B, int C){
     struct node* iter = first;
     struct node* iter2 = first;
 
-    while (iter!= NULL )
+    while (iter!= NULL)
     {
         if(ABCcompare(temp,iter) == 0){
             iter2 = iter;
@@ -124,15 +124,12 @@ struct node* insertInOrder(struct node* first,int coeff, int A, int B, int C){
             iter2->next = temp;
             return first;
         }
-        
-        iter2 = iter;
+         iter2 = iter;
         iter = iter->next;
     }
-
     temp->next = iter;
     iter2->next = temp;
     return first;
-       
 }
 
 void traversal(struct node* first){

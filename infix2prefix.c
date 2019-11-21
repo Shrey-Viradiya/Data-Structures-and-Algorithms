@@ -49,7 +49,7 @@ int f(char a)
 
 	if(a == '+' || a == '-') return 1;
 
-    if(a == '^') return 6;
+    if(a == '^') return 5;
 
     if(a == '(') return 9;
 
@@ -65,7 +65,7 @@ int g(char a)
 
 	if(a == '+' || a == '-') return 2;
 
-    if(a == '^') return 5;
+    if(a == '^') return 6;
 
     if(a == '(') return 0;
 

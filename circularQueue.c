@@ -23,8 +23,8 @@ void enQueue(struct circularQueue* queue){
         scanf("%d",&num);
         queue-> rear = (queue->rear + 1) % queue->size;
         *(queue->arr + queue->rear) = num;
-        if (queue->front == -1) queue->front = 0;        
-    }    
+        if (queue->front == -1) queue->front = 0;
+    }
 }
 
 void deQueue(struct circularQueue* queue){
@@ -66,8 +66,6 @@ void display(struct circularQueue *queue){
             printf("\n%d",*(queue->arr + i) );
         }
     }
-    
-    
 }
 
 void main(){
