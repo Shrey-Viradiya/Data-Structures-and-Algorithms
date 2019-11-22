@@ -5,19 +5,15 @@ int binarySearch(int arr[], int left, int right, int x)
     if (right >= left) { 
         int mid = left + (right - left) / 2; 
   
-        if (arr[mid] == x) 
-            return mid; 
-  
-        if (arr[mid] > x) 
-            return binarySearch(arr, left, mid - 1, x); 
-  
-        return binarySearch(arr, mid + 1, right, x); 
+        if (arr[mid] == x) return mid; 
+        else if (arr[mid] > x) return binarySearch(arr, left, mid - 1, x); 
+        else return binarySearch(arr, mid + 1, right, x); 
     } 
   
     return -1; 
 } 
   
-int main(void) 
+int main() 
 { 
 
     int arr[5];
@@ -35,7 +31,7 @@ int main(void)
         {
             if(arr[i] > arr[j])
             {
-                temp     = arr[i];
+                temp   = arr[i];
                 arr[i] = arr[j];
                 arr[j] = temp;
             }

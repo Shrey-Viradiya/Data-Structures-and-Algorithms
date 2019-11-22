@@ -111,15 +111,15 @@ void traverseRECinorder(struct node* root){
 void traverseRECpreorder(struct node* root){
     if(root != NULL){
         printf("%d ",root->data);
-        traverseRECinorder(root->left);
-        traverseRECinorder(root->right);
+        traverseRECpreorder(root->left);
+        traverseRECpreorder(root->right);
     }
 }
 
 void traverseRECpostorder(struct node* root){
     if(root != NULL){
-        traverseRECinorder(root->left);
-        traverseRECinorder(root->right);
+        traverseRECpostorder(root->left);
+        traverseRECpostorder(root->right);
         printf("%d ",root->data);
     }
 }
@@ -144,19 +144,24 @@ struct node* deleteNode(struct node* root,int data){
 
     //
 
-    if (root->left == NULL && root->right == NULL)
-    {
-        root = NULL;
-        return root;
-    }
-    else if(root->left == NULL){
-        root = root->right;
-        return root;
-    }
-    else if(root->right == NULL){
-        root= root->left;
-        return root;
-    }
+    // if (root->left == NULL && root->right == NULL)
+    // {
+    //     if(root->data == data){
+    //     root = NULL;
+    //     }
+    //     else{
+    //         printf("Not Found!\n");
+    //     }
+    //     return root;
+    // }
+    // else if(root->left == NULL){
+    //     root = root->right;
+    //     return root;
+    // }
+    // else if(root->right == NULL){
+    //     root= root->left;
+    //     return root;
+    // }
 
     // Reach to that Node
 
@@ -164,17 +169,20 @@ struct node* deleteNode(struct node* root,int data){
     struct node* pre = root;
     while (iterNode->data != data) {
 
-        if(data < iterNode->data && iterNode->left != NULL){
+
+        if(data < iterNode->data){
             pre = iterNode;
             iterNode = iterNode->left;
-            continue;
         }
-        else if(data > iterNode->data && iterNode->right != NULL){
+        else if(data > iterNode->data){
             pre = iterNode;
             iterNode = iterNode->right;
-            continue;
         }
 
+        if(iterNode == NULL){
+            printf("\ndata not found");
+            return root;
+        }
     }
 
     if (iterNode->data != data)
@@ -185,12 +193,15 @@ struct node* deleteNode(struct node* root,int data){
 
     if (iterNode->left == NULL && iterNode->right == NULL)
     {
+        free(iterNode);
         iterNode = NULL;
         return root;
     }
     else if(iterNode->left == NULL){
         if(pre->right == iterNode)
-            pre->right = iterNode->right;
+        {pre->right = iterNode->right;
+            iterNode = NULL;
+        }
         else
             pre->left = iterNode->right;
         return root;
@@ -210,6 +221,47 @@ struct node* deleteNode(struct node* root,int data){
         return root;
     }
 
+}
+
+struct node* deleteNodeREC(struct node* root, struct node* parent , int data){
+    if(root == NULL){
+        printf("\nData Not Found!\n");
+        return NULL;
+    }
+
+    if(data< root->data) deleteNodeREC(root->left,root,data);
+    else if (data > root->data) deleteNodeREC(root->right, root,data);
+    else{
+        if(root->left == NULL && root->right == NULL) {
+            if(parent->left == root){
+                parent->left = NULL;
+            }else parent->right = NULL;
+            root = NULL;
+            return root;
+        }
+        else if(root->left == NULL){
+            root->data = root->right->data;
+            root->left = root->right->left;
+            root->right = root->right->right;
+            return root;
+        }
+        else if(root->right == NULL){
+            root->data = root->left->data;
+            root->left = root->left->left;
+            root->right = root->left->right;
+            return root;
+        }
+        else{
+            struct node* iter = root->right;
+            while(iter->left != NULL){
+                iter = iter->left;
+            }
+            root->data = iter->data;
+            deleteNode(iter,data);
+            return root;
+        }
+    }
+    return root;
 }
 
 void traverseInorder(struct node* root){
@@ -240,23 +292,21 @@ int main(){
     root = insert(root, 2);
     root = insert(root, 5);
     root = insert(root, 8);
+    root = insert(root, 10);
+    root = insert(root, 15);
     root = insert(root, 3);
 
     traverseInorder(root);
     printf("\n");
 
-    traverseRECinorder(root);
-    printf("\n");
-
-    traverseRECpostorder(root);
-    printf("\n");
-
-    traverseRECpreorder(root);
-
-    root = deleteNode(root, 5);
-
+    root = deleteNode(root, 10);
     printf("\n");
     traverseRECinorder(root);
 
+    root = deleteNodeREC(root, NULL,15);
+    printf("\n");
+    traverseRECinorder(root);
+
+    printf("Done");
     return 0;
 }
