@@ -108,6 +108,7 @@ void main(){
         }
         PUSH(&s, infix[i++]);        
     }
+    
     while(s.arr[s.top]!='#'){
             char temp = POP(&s); // pop
             if(temp != '(' && temp != ')'){ 
