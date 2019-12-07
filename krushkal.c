@@ -40,8 +40,8 @@ void krushkal(int n,int cost[50][50])
 		cost[a][b]=cost[b][a]=INT_MAX;
 	}
 	printf("\n\tMinimum cost = %d\n",mincost);
-	
-	
+
+
 }
 int find(int i)
 {
@@ -100,14 +100,14 @@ printf("\n\tImplementation of Kruskal's algorithm\n");
 			new_cost[i][j]=cost[i][j];
 		}
 	}
-	
-	
-	
+
+
+
 	krushkal(n,new_cost);
 	break;
 case 2:
-	
-	
+
+
 	for(int q=0;q<n;q++)
 	{
 	printf("Enter the distance of new point from Point %d : ",(q+1));
@@ -115,8 +115,8 @@ case 2:
 	}
 	n++;
 
-	
-	
+
+
 	for(int p = 1;p<=n;p++)
 	{
 		if(p==n)
@@ -127,14 +127,14 @@ case 2:
 					cost[p][n]= new[p-1];
 
 		}
-			
+
 	}
 
 	for(int i=1;i<=n;i++)
 	{
 		for(int j=1;j<=n;j++)
 		{
-			
+
 			new_cost[i][j]=cost[i][j];
 		}
 	}
@@ -145,14 +145,14 @@ printf("\n");
 	// 			printf("(%d,%d)= %d  ,  ",i,j,cost[i][j]);
 	// 			printf("\n");
 	// 		}
-	
+
 	krushkal(n,new_cost);
 
 	for(int i=1;i<=n;i++)
 	{
 		for(int j=1;j<=n;j++)
 		{
-			
+
 			new_cost[i][j]=cost[i][j];
 		}
 	}
@@ -167,7 +167,7 @@ printf("\n");
 	{
 		for(int j=1;j<=n;j++)
 		{
-			
+
 			new_cost[i][j]=cost[i][j];
 		}
 	}
